@@ -72,20 +72,20 @@ def add_textbox():
 def clicked():
     total_points=0
     for i in range(len(subject_name)):   
-        try:
-            if(type(float(grades[i].text()))==float and type(int(credits[i].text()))==int):
-                if(float(grades[i].text())>=0 and float(grades[i].text())<=10 and int(credits[i].text())>0 and int(credits[i].text())<=4):
-                    total_points+=float(grades[i].text())*int(credits[i].text())
-                    gpa=total_points/sum(int(credits[j].text()) for j in range(len(credits)))
-                    text=QLabel(f"Your GPA is: {gpa:.2f}")
-                    text.setAlignment(Qt.AlignCenter)
-                    mainlayout.addWidget(text) 
-            else:
-                raise ValueError
-        except ValueError:
-            error=QLabel("Please enter valid inputs for grades (0-10) and credits (1-4).")
-            error.setAlignment(Qt.AlignCenter)
-            mainlayout.addWidget(error)
+            try:
+                if(type(float(grades[i].text()))==float and type(int(credits[i].text()))==int):
+                    if(float(grades[i].text())>=0 and float(grades[i].text())<=10 and int(credits[i].text())>0 and int(credits[i].text())<=4):
+                        total_points+=float(grades[i].text())*int(credits[i].text())
+                        gpa=total_points/sum(int(credits[i].text()) for i in range(len(credits)))
+                        gpa=f"{gpa:.2f}"
+                        if(i==len(subject_name)-1):
+                            label=QLabel(f"Your GPA is...{gpa}")
+                            label.setAlignment(Qt.AlignCenter)
+                            mainlayout.addWidget(label)
+            except ValueError:
+                error=QLabel("Please enter valid inputs for grades (0-10) and credits (1-4).")
+                error.setAlignment(Qt.AlignCenter)
+                mainlayout.addWidget(error)
 
 # buttons
 button1=QPushButton("+ Add Subject")
